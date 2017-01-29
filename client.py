@@ -13,7 +13,7 @@ def memorisation_fichier():
 	b=1
 	cpt=0
 	f=open(numero,'a+')
-	mess=raw_input("Donnez le nombre d'eleves et la matiere que vous voulez entrer ( de la forme : 'nombre_notes nom_matiere' \n")
+	mess=raw_input("Donnez le nombre d'eleves et la matiere que vous voulez entrer ( de la forme : 'nombre_notes nom_matiere' )\n")
 	mess=mess.split(" ")
 	for i in range(int(mess[0])):
 		f.write(mess[1])
@@ -24,7 +24,7 @@ def memorisation_fichier():
 		b=b+1
 	f.seek(0,0)
 	print "oui"
-	for line in f :
+	for line in f:
 		line=line.split(" ")
 		if line[0] == mess[1]:
 			cpt=cpt+1
@@ -37,10 +37,9 @@ def memorisation_fichier():
 			time.sleep(0.2)
 			s.send(line[1])
 			print line[1]
-
-			
+	
 	print("Les notes ont etes entres correctement, retour au menu principal\n")	
-	f.close()		
+	f.close()
 
 
 def reset():
@@ -66,9 +65,6 @@ def reset():
 		f=open(numero,'w')
 		f.write(contenu)
 		f.close()
-
-
-
 	elif mess == "0":
 		remove('notes.txt')
 	else:
@@ -92,7 +88,6 @@ def reset():
 	data=s.recv(BUFFER_SIZE)
 	print data
 
-
 def moyenne():
 	mess=raw_input("De qui voulez vous la moyenne? Ecrivez 0 si vous souhaitez la moyenne de tout le monde sur toutes les matieres; Ecrivez le nom de l'etudiant pour avoir la moyenne d'un etudiant sur toutes les matieres. Ecrivez 'matiere' pour avoir la moyenne d'une matiere \n ")
 	s.send("MOYENNE")
@@ -104,7 +99,7 @@ def moyenne():
 		s.send(matiere)
 	data=s.recv(BUFFER_SIZE)	
 	print data
-	
+
 def mini():
 	mess=raw_input("De qui voulez vous le mini? Ecrivez 0 si vous souhaitez le mini de tout le monde sur toutes les matieres; Ecrivez le nom de l'etudiant pour avoir la note mini d'un etudiant sur toutes les matieres. Ecrivez 'matiere' pour avoir le mini d'une matiere \n ")
 	s.send("MIN")
@@ -114,7 +109,7 @@ def mini():
 	if mess == 'matiere':
 		matiere=raw_input("De quelle matiere voulez vous le mini?\n")
 		s.send(matiere)
-	data=s.recv(BUFFER_SIZE)	
+	data=s.recv(BUFFER_SIZE)
 	print data
 
 
@@ -127,18 +122,17 @@ def maxi():
 	if mess == 'matiere':
 		matiere=raw_input("De quelle matiere voulez vous le max?\n")
 		s.send(matiere)
-	data=s.recv(BUFFER_SIZE)	
+	data=s.recv(BUFFER_SIZE)
 	print data
 
 
 
-s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 numero=s.recv(BUFFER_SIZE)
-str(numero)
-print numero
+print "Socket ID : "+ str(numero)
 while 1:
-	message=raw_input("Que souhaitez vous faire? Entrer des notes d'une matiere dans un fichier et les envoyer au serveur?Tapez 1.Connaitre une moyenne d'un eleve/matiere/tout le monde? Tapez 2. Reset toutes les notes, celle d'un eleve ou d'un module ?Tapez 3. Pour connaitre le min tapez 4, tapez 5 pour connaitre le max\n")
+	message=raw_input("Que souhaitez vous faire? Entrer des notes d'une matiere dans un fichier et les envoyer au serveur?Tapez 1.\nConnaitre une moyenne d'un eleve/matiere/tout le monde? Tapez 2.\nReset toutes les notes, celle d'un eleve ou d'un module ?Tapez 3.\nPour connaitre le min tapez 4, tapez 5 pour connaitre le max\n")
 	message=message.rstrip()
 	message=message.split(" ")
 	if message[0] == "1":
