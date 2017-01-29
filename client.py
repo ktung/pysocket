@@ -37,7 +37,7 @@ def memorisation_fichier():
 			time.sleep(0.2)
 			s.send(line[1])
 			print line[1]
-	
+
 	print("Les notes ont etes entres correctement, retour au menu principal\n")	
 	f.close()
 
@@ -66,7 +66,8 @@ def reset():
 		f.write(contenu)
 		f.close()
 	elif mess == "0":
-		remove('notes.txt')
+		remove(numero)
+		print "File %s removed." % ("/tmp/"+numero)
 	else:
 		contenu = ""
 		f=open(numero,'r')

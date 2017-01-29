@@ -204,7 +204,6 @@ BUFFER_SIZE = 100
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
 tcpsock.bind((TCP_IP,TCP_PORT))
-# threads = []
 
 while True:
 	tcpsock.listen(4)
@@ -212,6 +211,3 @@ while True:
 	(conn,(ip,port)) = tcpsock.accept()
 	newthread = ClientThread(ip,port,conn)
 	newthread.start()
-	# threads.append(newthread)
-# for t in threads:
-# 	t.join()
